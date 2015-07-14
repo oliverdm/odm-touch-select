@@ -1,0 +1,16 @@
+{
+    "name": "odm-touch-select",
+    "description": "A JavaScript select input for dragging via mouse, touch or mousewheel.",
+    "version": "0.1.0",
+    "main": ["touch-select.js", "touch-select.css", "touch-select.min.js"],
+    "ignore": ["test", "demo.html", "README.md", ".gitignore"],
+    "keywords": ["select input"],
+    "url": "http://github.com/oliverdm/odm-touch-select",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/oliverdm/odm-touch-select.git"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "private": false
+}

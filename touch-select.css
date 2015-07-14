@@ -1,0 +1,42 @@
+.touch-select {
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+.touch-select-inner {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+.touch-select-inner.dragging {
+    cursor: all-scroll;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+.touch-select-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+}
+.touch-select-item {
+    font-size: 16px;
+    width: 100%;
+    height: 2rem;
+    overflow: hidden;
+}
+.touch-select-item:nth-child(even) {
+    /*background-color: #ddd;*/
+}
+.touch-select-indicator {
+    position: absolute;
+    width: 100%;
+    border: 2px solid #333;
+    box-sizing: border-box;
+    z-index: 1;
+}
