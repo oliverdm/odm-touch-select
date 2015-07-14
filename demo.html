@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>odm-touch-select demo</title>
+    
+    <link rel="stylesheet" href="touch-select.css">
+    
+    <style>
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+body {
+    padding-bottom: 80px;
+}
+#term {
+    min-height: 50px;
+    line-height: 50px;
+}
+#selectContainer {
+    margin: 20px 10%;
+}
+#selectContainer .touch-select {
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+    /* http://colorzilla.com/gradient-editor/#000000+0,000000+3,000000+10,000000+25,000000+50,000000+80,000000+90,000000+97,000000+100&0.45+0,0.25+3,0.15+10,0.1+25,0+50,0.1+80,0.15+90,0.25+97,0.45+100 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.3) 5%,rgba(0,0,0,0.2) 10%,rgba(0,0,0,0.1) 25%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.1) 80%,rgba(0,0,0,0.2) 90%,rgba(0,0,0,0.3) 95%,rgba(0,0,0,0.5) 100%);
+}
+#selectContainer .touch-select:nth-child(2) .touch-select-indicator {
+    border-style: none;
+}
+#selectContainer .touch-select .touch-select-item {
+    line-height: 2rem;
+}
+    </style>
+</head>
+<body>
+
+<h3>Pick a favorite</h3>
+<div id="term"></div>
+<div id="selectContainer"></div>
+<div><button id="randomBtn">Random</button></div>
+
+<script src="touch-select.js"></script>
+
+<script>
+(function(){
+    var select1 = new TouchSelect({
+        viewSize: 6,
+        items: [
+            {
+                get text() {
+                    return '-';
+                }
+            },
+            'apple',
+            'banana',
+            'cranberry',
+            'mango',
+            'orange',
+            'peach',
+            'pineapple',
+            'strawberry'
+        ]
+    });
+    
+    var select2 = new TouchSelect([{text: '-'}, 'jelly', 'juice', 'pie', 'pudding'], {
+        viewSize: 1
+    });
+    
+    [select1, select2].forEach(function(select){
+        var element = select.build();
+        document.getElementById('selectContainer').appendChild(element);
+        select.element.addEventListener('change', updateTerm, false);
+    });
+    
+    document.getElementById('randomBtn').addEventListener('click', function(e){
+        [select1, select2].forEach(function(select, i){
+            if (select.length > 0) {
+                var randomIdx = Math.floor(Math.random() * (select.length));
+                select.select(randomIdx);
+            }
+        });
+        updateTerm();
+    }, false);
+    
+    function updateTerm(){
+        var term = '',
+            sep = '';
+        [select1, select2].forEach(function(select){
+            if (Object.prototype.toString.call(select.selectedItem) !== '[object Object]') {
+                term += sep + select.selectedItem;
+                sep = ' ';
+            }
+        });
+        document.getElementById('term').textContent = term.trim() ? term : '-';
+    }
+    
+    updateTerm();
+    
+})();
+</script>
+
+</body>
+</html>
